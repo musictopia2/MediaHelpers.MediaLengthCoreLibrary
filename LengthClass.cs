@@ -2,7 +2,7 @@
 public static class LengthClass
 {
     public static ILengthCache? LengthCache { get; set; }
-    public static int Length(string tempPath)
+    public static async Task<int> LengthAsync(string tempPath)
     {
         // Check if the file exists
         if (File.Exists(tempPath))
@@ -18,7 +18,7 @@ public static class LengthClass
                     if (lastWriteDate < earliestCacheDate)
                     {
                         int? value;
-                        value = LengthCache.GetLength(tempPath);
+                        value = await LengthCache.GetLengthAsync(tempPath);
                         if (value is not null)
                         {
                             return value.Value;
